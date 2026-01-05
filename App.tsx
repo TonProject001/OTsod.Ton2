@@ -88,6 +88,13 @@ const App: React.FC = () => {
         @media print {
           @page {
             size: ${activeTab === 'disbursement' ? 'A4 landscape' : 'A4 portrait'};
+            /* Set margin: 10mm for landscape to allow more width, 15mm for portrait */
+            margin: ${activeTab === 'disbursement' ? '10mm' : '15mm'};
+          }
+          body {
+            /* Ensure background graphics are printed if needed */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
           }
         }
       `}</style>

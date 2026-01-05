@@ -105,13 +105,13 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
 
       {/* Table */}
       <div className="w-full">
-        {/* Adjusted column widths: Days 17px, Name 145px, Position 95px, Seq 30px, Rate 30px */}
+        {/* Adjusted column widths: Rate increased to 45px */}
         <table className="w-full text-[10px] border-collapse border border-black text-center print:text-[10px] table-fixed">
           <colgroup>
-            <col className="w-[30px]" /> {/* Seq: Increased from 20px */}
+            <col className="w-[30px]" /> {/* Seq */}
             <col className="w-[145px]" /> {/* Name */}
             <col className="w-[95px]" /> {/* Position */}
-            <col className="w-[30px]" /> {/* Rate: Increased from 18px */}
+            <col className="w-[45px]" /> {/* Rate: Increased from 30px to 45px */}
             {/* Days: 31 days * 17px = 527px */}
             {daysArray.map(d => <col key={d} className="w-[17px]" />)} 
             <col className="w-[30px]" /> {/* Total Hours */}

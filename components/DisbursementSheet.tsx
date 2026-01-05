@@ -94,7 +94,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
   };
 
   return (
-    <div className="bg-white p-2 print:p-0 w-full mx-auto">
+    <div className="bg-white p-2 print:p-0 w-full mx-auto print:w-full">
       {/* Header */}
       <div className="text-center w-full mb-4">
         <h2 className="text-lg font-bold print:text-xl leading-tight">หลักฐานการเบิกจ่ายค่าตอบแทนการปฏิบัติงานนอกเวลาราชการ</h2>
@@ -105,18 +105,19 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
 
       {/* Table */}
       <div className="w-full">
+        {/* Adjusted column widths: Days 17px, Name 145px, Position 95px, Seq 30px, Rate 30px */}
         <table className="w-full text-[10px] border-collapse border border-black text-center print:text-[10px] table-fixed">
           <colgroup>
-            <col className="w-[25px]" /> {/* Seq */}
-            <col className="w-[130px]" /> {/* Name - Widen to show full name */}
-            <col className="w-[90px]" /> {/* Position */}
-            <col className="w-[20px]" /> {/* Rate */}
-            {/* Days: 31 days * 20px = 620px */}
-            {daysArray.map(d => <col key={d} className="w-[20px]" />)} 
+            <col className="w-[30px]" /> {/* Seq: Increased from 20px */}
+            <col className="w-[145px]" /> {/* Name */}
+            <col className="w-[95px]" /> {/* Position */}
+            <col className="w-[30px]" /> {/* Rate: Increased from 18px */}
+            {/* Days: 31 days * 17px = 527px */}
+            {daysArray.map(d => <col key={d} className="w-[17px]" />)} 
             <col className="w-[30px]" /> {/* Total Hours */}
-            <col className="w-[45px]" /> {/* Rate/Hr */}
-            <col className="w-[45px]" /> {/* Total Money - Narrowed from 55px */}
-            <col className="w-[45px]" /> {/* Sign - Narrowed from 55px */}
+            <col className="w-[40px]" /> {/* Rate/Hr */}
+            <col className="w-[45px]" /> {/* Total Money */}
+            <col className="w-[45px]" /> {/* Sign */}
           </colgroup>
           <thead>
             <tr className="bg-gray-100 print:bg-white h-9">
@@ -133,7 +134,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
             <tr className="bg-gray-100 print:bg-white h-5">
               <th className="border border-black text-[8px] px-0 font-normal">ชั่วโมงละบาท</th>
               {daysArray.map(day => (
-                <th key={day} className={`border border-black px-0 font-normal ${isHoliday(day) ? 'bg-blue-100 print:bg-gray-300' : ''}`}>
+                <th key={day} className={`border border-black px-0 font-normal text-[9px] ${isHoliday(day) ? 'bg-blue-100 print:bg-gray-300' : ''}`}>
                   {day}
                 </th>
               ))}
@@ -154,9 +155,10 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
                   {/* Row for Rate 60 */}
                   <tr className="h-5">
                     <td rowSpan={2} className="border border-black">{index + 1}</td>
-                    <td rowSpan={2} className="border border-black text-left px-1 whitespace-nowrap overflow-hidden text-ellipsis">{person.name}</td>
-                    {/* Position cell */}
-                    <td rowSpan={2} className="border border-black text-center px-1 text-[10px] leading-tight whitespace-pre-line">{person.position}</td>
+                    {/* Name: Removed nowrap/ellipsis, allowed wrap, adjust padding */}
+                    <td rowSpan={2} className="border border-black text-left px-1 whitespace-normal break-words leading-tight">{person.name}</td>
+                    {/* Position: Slight font reduction if needed, allowed wrap */}
+                    <td rowSpan={2} className="border border-black text-center px-1 text-[9px] leading-tight whitespace-pre-line break-words">{person.position}</td>
                     <td className="border border-black text-[9px]">60</td>
                     {daysArray.map(day => (
                       <td key={day} className={`border border-black p-0 ${isHoliday(day) ? 'bg-blue-50 print:bg-gray-200' : ''}`}>

@@ -228,7 +228,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
               <span>ลงชื่อ................................... ผู้ตรวจสอบ</span>
             </div>
             
-            <div className="font-semibold">นายนันท์ชัย กองแก้ว</div>
+            <div className="font-semibold">นายธนันท์ชัย กองแก้ว</div>
             <div>นายแพทย์ชำนาญการพิเศษ</div>
             {/* Adjusted scale slightly for narrower column */}
             <div className="whitespace-nowrap scale-[0.80] origin-top">หัวหน้ากลุ่มภารกิจด้านพัฒนาระบบบริการและสนับสนุนบริการสุขภาพ</div>

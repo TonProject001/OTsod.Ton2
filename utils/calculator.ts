@@ -59,7 +59,9 @@ export function calculateOT(
 
         if (otHours > 0) {
           let holidayPay;
-          if (isSpecial) {
+          if (otHours === 7) {
+            holidayPay = 360;
+          } else if (isSpecial) {
             holidayPay = otHours * 50;
             if (holidayPay > 400) holidayPay = 400;
           } else {
@@ -130,8 +132,8 @@ export function generateMockData(year: number): RawRecord[] {
   const names = [
     'นายวิทวัส แปงใจ', 
     'นายปรพัฒน์ ขัตวงษ์', 
-    'นายศักดิ์ดา มั่นคง', // ชื่อสมมติ
-    'นางสาวนิภา ขยันงาน'  // ชื่อสมมติ
+    'อนุทิน ชาญวีรกูล', // ชื่อสมมติ
+    'ประยุทธ์ จันทร์โอชา'  // ชื่อสมมติ
   ];
   const records: RawRecord[] = [];
   

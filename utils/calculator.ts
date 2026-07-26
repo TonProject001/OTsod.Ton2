@@ -54,14 +54,19 @@ export function calculateOT(
 
       if (holiday) {
         const durationHours = (endTime.getTime() - startTime.getTime()) / (1000 * 60 * 60);
-        otHours = Math.floor(durationHours);
+        let rawOtHours = Math.floor(durationHours);
+        
+        if (rawOtHours < 8 && rawOtHours > 0) {
+          otHours = rawOtHours - 1;
+        } else {
+          otHours = rawOtHours;
+        }
+
         if (otHours < 2) otHours = 0;
 
         if (otHours > 0) {
           let holidayPay;
-          if (otHours === 7) {
-            holidayPay = 360;
-          } else if (isSpecial) {
+          if (isSpecial) {
             holidayPay = otHours * 50;
             if (holidayPay > 400) holidayPay = 400;
           } else {
@@ -132,8 +137,8 @@ export function generateMockData(year: number): RawRecord[] {
   const names = [
     'นายวิทวัส แปงใจ', 
     'นายปรพัฒน์ ขัตวงษ์', 
-    'อนุทิน ชาญวีรกูล', // ชื่อสมมติ
-    'ประยุทธ์ จันทร์โอชา'  // ชื่อสมมติ
+    'นายศักดิ์ดา มั่นคง', // ชื่อสมมติ
+    'นางสาวนิภา ขยันงาน'  // ชื่อสมมติ
   ];
   const records: RawRecord[] = [];
   

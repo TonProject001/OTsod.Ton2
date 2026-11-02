@@ -1,5 +1,6 @@
 {
-  "name": "OT งานโสต เจ๋ง เพิ่มหน้า3",
-  "description": "ทดสอบเพิ่มหน้า3",
-  "requestFramePermissions": []
+  "name": "Remix OT งานโสต เจ๋ง เพิ่มหน้า3",
+  "description": "ปรับปรุงเงื่อนไขการคิด OT และการแสดงผลของ นายปรพัฒน์ ขัตวงษ์ และ นายวิทวัส แปงใจ เทียบเท่าเจ้าหน้าที่ปกติ",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

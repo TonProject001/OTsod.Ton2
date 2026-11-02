@@ -82,19 +82,21 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen pb-12">
+    <div className="min-h-screen pb-12 print:min-h-0 print:pb-0 print:p-0">
       {/* Dynamic Print Styles */}
       <style>{`
         @media print {
           @page {
             size: ${activeTab === 'disbursement' ? 'A4 landscape' : 'A4 portrait'};
-            /* Set margin: 10mm for landscape to allow more width, 15mm for portrait */
-            margin: ${activeTab === 'disbursement' ? '10mm' : '15mm'};
+            margin: ${activeTab === 'disbursement' ? '5mm 6mm' : '5mm'};
           }
-          body {
-            /* Ensure background graphics are printed if needed */
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
+          html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: white !important;
+            width: 100% !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
         }
       `}</style>
@@ -134,7 +136,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <main className="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8 print:max-w-none print:w-full print:m-0 print:p-0">
         
         {/* Controls - Hidden on Print */}
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-100 no-print">
@@ -253,7 +255,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="min-h-[400px]">
+        <div className="min-h-[400px] print:min-h-0 print:m-0 print:p-0">
           {activeTab === 'summary' && <OtSummary data={calculationResult} />}
           {activeTab === 'sheet' && <SignSheet data={calculationResult} month={month} year={year} />}
           {activeTab === 'disbursement' && <DisbursementSheet data={calculationResult} month={month} year={year} customHolidays={customHolidays} />}

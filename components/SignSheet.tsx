@@ -123,17 +123,19 @@ export const SignSheet: React.FC<Props> = ({ data, month, year }) => {
         records={generalRecords} 
         monthName={monthName} 
         year={year} 
-        titleSuffix="พนักงานทั่วไป"
+        titleSuffix={specialRecords.length > 0 ? "พนักงานทั่วไป" : undefined}
       />
 
-      {/* Special Staff Page (Printed on new page) */}
-      <SignSheetPage 
-        records={specialRecords} 
-        monthName={monthName} 
-        year={year} 
-        titleSuffix="พนักงานโสตฯ/จ้างเหมาบริการ"
-        isSecondPage={generalRecords.length > 0} 
-      />
+      {/* Special Staff Page (Printed on new page) - Only rendered if there are separate special staff */}
+      {specialRecords.length > 0 && (
+        <SignSheetPage 
+          records={specialRecords} 
+          monthName={monthName} 
+          year={year} 
+          titleSuffix="พนักงานโสตฯ/จ้างเหมาบริการ"
+          isSecondPage={generalRecords.length > 0} 
+        />
+      )}
     </div>
   );
 };

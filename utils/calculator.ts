@@ -1,6 +1,7 @@
 import { RawRecord, CalculationResult, OTRecord } from '../types';
 
-export const SPECIAL_STAFF = ['นายวิทวัส แปงใจ', 'นายปรพัฒน์ ขัตวงษ์'];
+// ปรับเปลี่ยนการจ้างงาน: นายวิทวัส แปงใจ และ นายปรพัฒน์ ขัตวงษ์ เป็นเจ้าหน้าที่ปกติเหมือนคนอื่นๆ
+export const SPECIAL_STAFF: string[] = [];
 
 function formatTime(date: Date): string {
   const hours = date.getHours().toString().padStart(2, '0');
@@ -135,10 +136,12 @@ export function calculateOT(
 export function generateMockData(year: number): RawRecord[] {
   // Using names from your original code + professional sounding placeholders
   const names = [
-    'นายวิทวัส แปงใจ', 
-    'นายปรพัฒน์ ขัตวงษ์', 
-    'นายศักดิ์ดา มั่นคง', // ชื่อสมมติ
-    'นางสาวนิภา ขยันงาน'  // ชื่อสมมติ
+    'นางสาวปพิชญา เอี้ยงหมี',
+    'นางสาวกนกวรรณ วงษ์กล่ำ',
+    'นายศุภฤกษ์ เนตรแก้ว',
+    'นายกฤชณัท เทพมงคล',
+    'นายปรพัฒน์ ขัตวงษ์',
+    'นายวิทวัส แปงใจ'
   ];
   const records: RawRecord[] = [];
   

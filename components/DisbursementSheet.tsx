@@ -111,31 +111,28 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
       <div className="w-full overflow-x-auto print:overflow-visible">
         <table className="w-full text-[10px] print:text-[9px] border-collapse border border-black text-center table-fixed">
           <colgroup>
-            <col className="w-[24px]" /> {/* Seq */}
-            <col className="w-[125px]" /> {/* Name */}
-            <col className="w-[80px]" /> {/* Position */}
-            <col className="w-[18px]" /> {/* Rate */}
+            <col className="w-[120px]" /> {/* Name */}
+            <col className="w-[90px]" /> {/* Position */}
+            <col className="w-[24px]" /> {/* Rate */}
             {/* Days: 31 days * 19px = 589px */}
             {daysArray.map(d => <col key={d} className="w-[19px]" />)} 
-            <col className="w-[28px]" /> {/* Total Hours */}
-            <col className="w-[38px]" /> {/* Rate/Hr */}
-            <col className="w-[46px]" /> {/* Total Money */}
-            <col className="w-[46px]" /> {/* Sign */}
+            <col className="w-[32px]" /> {/* Total Hours */}
+            <col className="w-[42px]" /> {/* Rate/Hr */}
+            <col className="w-[48px]" /> {/* Total Money */}
+            <col className="w-[48px]" /> {/* Sign */}
           </colgroup>
           <thead>
             <tr className="bg-gray-100 print:bg-white h-8 print:h-7">
-              <th rowSpan={2} className="border border-black px-0.5 print:px-0">ลำดับ</th>
-              <th rowSpan={2} className="border border-black px-1 print:px-0.5">ชื่อ-สกุล</th>
-              <th rowSpan={2} className="border border-black px-0.5 print:px-0">ตำแหน่ง</th>
-              <th className="border border-black h-4 text-[9px] print:text-[8px] px-0">ตอบแทน</th>
-              <th colSpan={daysInMonth} className="border border-black h-4 px-0">วันที่ขึ้นปฏิบัติราชการ</th>
-              <th rowSpan={2} className="border border-black px-0 leading-tight">จำนวน<br/>ชั่วโมง</th>
-              <th rowSpan={2} className="border border-black px-0 leading-tight">จำนวนเงิน<br/>ต่อชั่วโมง</th>
-              <th rowSpan={2} className="border border-black px-0 leading-tight text-[9px] print:text-[8px]">จำนวนเงิน<br/>รวม</th>
+              <th rowSpan={2} className="border border-black px-1.5 print:px-1">ชื่อ-สกุล</th>
+              <th rowSpan={2} className="border border-black px-1 print:px-0.5">ตำแหน่ง</th>
+              <th rowSpan={2} className="border border-black px-0 text-[8.5px] print:text-[8px] leading-tight font-semibold">อัตรา/<br/>ชม.</th>
+              <th colSpan={daysInMonth} className="border border-black h-4 px-0">วันที่ขึ้นปฏิบัติงาน</th>
+              <th rowSpan={2} className="border border-black px-0 leading-tight">จำนวน<br/>เวร (ชม.)</th>
+              <th rowSpan={2} className="border border-black px-0 leading-tight">จำนวนเงิน<br/>ต่อเวร</th>
+              <th rowSpan={2} className="border border-black px-0 leading-tight text-[9px] print:text-[8px]">รวม<br/>จำนวนเงิน</th>
               <th rowSpan={2} className="border border-black px-0.5 print:px-0">ลายมือชื่อ</th>
             </tr>
             <tr className="bg-gray-100 print:bg-white h-5 print:h-4">
-              <th className="border border-black text-[8px] print:text-[7.5px] px-0 font-normal">ชั่วโมงละบาท</th>
               {daysArray.map(day => (
                 <th key={day} className={`border border-black px-0 font-normal ${isHoliday(day) ? 'bg-blue-100 print:bg-gray-300' : ''}`}>
                   {day}
@@ -144,7 +141,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((person, index) => {
+            {filteredData.map((person) => {
               const hours60 = person.records.filter(r => r.type === 'วันหยุด').reduce((sum, r) => sum + r.hours, 0);
               const pay60 = person.records.filter(r => r.type === 'วันหยุด').reduce((sum, r) => sum + r.pay, 0);
               
@@ -155,28 +152,11 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
 
               return (
                 <React.Fragment key={person.name}>
-                  {/* Row for Rate 60 */}
-                  <tr className="h-5 print:h-[18px]">
-                    <td rowSpan={2} className="border border-black">{index + 1}</td>
-                    <td rowSpan={2} className="border border-black text-left px-1 whitespace-nowrap overflow-hidden text-ellipsis">{person.name}</td>
-                    {/* Position cell */}
-                    <td rowSpan={2} className="border border-black text-center px-0.5 text-[9.5px] print:text-[8.5px] leading-tight whitespace-pre-line">{person.position}</td>
-                    <td className="border border-black text-[9px] print:text-[8px] px-0">60</td>
-                    {daysArray.map(day => (
-                      <td key={day} className={`border border-black p-0 ${isHoliday(day) ? 'bg-blue-50 print:bg-gray-200' : ''}`}>
-                        {getHoursForDay(person.records, day, 60)}
-                      </td>
-                    ))}
-                    <td className="border border-black">{hours60 > 0 ? hours60 : ''}</td>
-                    <td className="border border-black text-right px-1 print:px-0.5">{pay60 > 0 ? pay60.toLocaleString() : ''}</td>
-                    <td rowSpan={2} className="border border-black text-right px-1 print:px-0.5 font-semibold">
-                      {totalPay > 0 ? totalPay.toLocaleString() : ''}
-                    </td>
-                    <td rowSpan={2} className="border border-black"></td>
-                  </tr>
-                  
                   {/* Row for Rate 50 */}
                   <tr className="h-5 print:h-[18px]">
+                    <td rowSpan={2} className="border border-black text-left px-2 print:px-1 whitespace-nowrap overflow-hidden text-ellipsis">{person.name}</td>
+                    {/* Position cell */}
+                    <td rowSpan={2} className="border border-black text-center px-0.5 text-[9.5px] print:text-[8.5px] leading-tight whitespace-pre-line">{person.position}</td>
                     <td className="border border-black text-[9px] print:text-[8px] px-0">50</td>
                     {daysArray.map(day => (
                       <td key={day} className={`border border-black p-0 ${isHoliday(day) ? 'bg-blue-50 print:bg-gray-200' : ''}`}>
@@ -185,6 +165,22 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
                     ))}
                     <td className="border border-black">{hours50 > 0 ? hours50 : ''}</td>
                     <td className="border border-black text-right px-1 print:px-0.5">{pay50 > 0 ? pay50.toLocaleString() : ''}</td>
+                    <td rowSpan={2} className="border border-black text-right px-1 print:px-0.5 font-semibold">
+                      {totalPay > 0 ? totalPay.toLocaleString() : ''}
+                    </td>
+                    <td rowSpan={2} className="border border-black"></td>
+                  </tr>
+                  
+                  {/* Row for Rate 60 */}
+                  <tr className="h-5 print:h-[18px]">
+                    <td className="border border-black text-[9px] print:text-[8px] px-0">60</td>
+                    {daysArray.map(day => (
+                      <td key={day} className={`border border-black p-0 ${isHoliday(day) ? 'bg-blue-50 print:bg-gray-200' : ''}`}>
+                        {getHoursForDay(person.records, day, 60)}
+                      </td>
+                    ))}
+                    <td className="border border-black">{hours60 > 0 ? hours60 : ''}</td>
+                    <td className="border border-black text-right px-1 print:px-0.5">{pay60 > 0 ? pay60.toLocaleString() : ''}</td>
                   </tr>
                 </React.Fragment>
               );
@@ -192,7 +188,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
 
             {/* Total Footer Row */}
             <tr className="font-bold bg-gray-50 print:bg-white h-7 print:h-[22px] text-[10px] print:text-[9px]">
-              <td colSpan={daysInMonth + 3} className="border border-black text-center px-2 print:px-1">
+              <td colSpan={daysInMonth + 2} className="border border-black text-center px-2 print:px-1">
                 รวมรายการจ่ายทั้งสิ้น {totalAmount.toLocaleString()} บาท ({bahttext(totalAmount)})
               </td>
               <td className="border border-black text-center">รวม</td>

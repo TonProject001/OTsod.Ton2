@@ -98,44 +98,44 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
   };
 
   return (
-    <div className="bg-white p-2 print:p-0 w-full mx-auto">
+    <div className="bg-white p-2 print:p-0 w-full mx-auto print:max-w-none print:w-full print:break-inside-avoid print:page-break-inside-avoid">
       {/* Header */}
-      <div className="text-center w-full mb-4">
-        <h2 className="text-lg font-bold print:text-xl leading-tight">หลักฐานการเบิกจ่ายค่าตอบแทนการปฏิบัติงานนอกเวลาราชการ</h2>
-        <p className="text-sm print:text-base mt-1 leading-tight">
+      <div className="text-center w-full mb-3 print:mb-1.5">
+        <h2 className="text-lg font-bold print:text-[15px] leading-tight">หลักฐานการเบิกจ่ายค่าตอบแทนการปฏิบัติงานนอกเวลาราชการ</h2>
+        <p className="text-sm print:text-[11px] mt-0.5 leading-tight text-gray-800">
           ส่วนราชการโรงพยาบาลสมเด็จพระเจ้าตากสินมหาราช ประจำเดือน {monthName} พ.ศ. {year + 543} แผนก งานโสตทัศนศึกษา
         </p>
       </div>
 
       {/* Table */}
-      <div className="w-full">
-        <table className="w-full text-[10px] border-collapse border border-black text-center print:text-[10px] table-fixed">
+      <div className="w-full overflow-x-auto print:overflow-visible">
+        <table className="w-full text-[10px] print:text-[9px] border-collapse border border-black text-center table-fixed">
           <colgroup>
-            <col className="w-[25px]" /> {/* Seq */}
-            <col className="w-[130px]" /> {/* Name - Widen to show full name */}
-            <col className="w-[90px]" /> {/* Position */}
-            <col className="w-[20px]" /> {/* Rate */}
-            {/* Days: 31 days * 20px = 620px */}
-            {daysArray.map(d => <col key={d} className="w-[20px]" />)} 
-            <col className="w-[30px]" /> {/* Total Hours */}
-            <col className="w-[45px]" /> {/* Rate/Hr */}
-            <col className="w-[45px]" /> {/* Total Money - Narrowed from 55px */}
-            <col className="w-[45px]" /> {/* Sign - Narrowed from 55px */}
+            <col className="w-[24px]" /> {/* Seq */}
+            <col className="w-[125px]" /> {/* Name */}
+            <col className="w-[80px]" /> {/* Position */}
+            <col className="w-[18px]" /> {/* Rate */}
+            {/* Days: 31 days * 19px = 589px */}
+            {daysArray.map(d => <col key={d} className="w-[19px]" />)} 
+            <col className="w-[28px]" /> {/* Total Hours */}
+            <col className="w-[38px]" /> {/* Rate/Hr */}
+            <col className="w-[46px]" /> {/* Total Money */}
+            <col className="w-[46px]" /> {/* Sign */}
           </colgroup>
           <thead>
-            <tr className="bg-gray-100 print:bg-white h-9">
-              <th rowSpan={2} className="border border-black px-1">ลำดับ</th>
-              <th rowSpan={2} className="border border-black px-1">ชื่อ-สกุล</th>
-              <th rowSpan={2} className="border border-black px-1">ตำแหน่ง</th>
-              <th className="border border-black h-4 text-[9px]">ตอบแทน</th>
-              <th colSpan={daysInMonth} className="border border-black h-4">วันที่ขึ้นปฏิบัติราชการ</th>
+            <tr className="bg-gray-100 print:bg-white h-8 print:h-7">
+              <th rowSpan={2} className="border border-black px-0.5 print:px-0">ลำดับ</th>
+              <th rowSpan={2} className="border border-black px-1 print:px-0.5">ชื่อ-สกุล</th>
+              <th rowSpan={2} className="border border-black px-0.5 print:px-0">ตำแหน่ง</th>
+              <th className="border border-black h-4 text-[9px] print:text-[8px] px-0">ตอบแทน</th>
+              <th colSpan={daysInMonth} className="border border-black h-4 px-0">วันที่ขึ้นปฏิบัติราชการ</th>
               <th rowSpan={2} className="border border-black px-0 leading-tight">จำนวน<br/>ชั่วโมง</th>
               <th rowSpan={2} className="border border-black px-0 leading-tight">จำนวนเงิน<br/>ต่อชั่วโมง</th>
-              <th rowSpan={2} className="border border-black px-0 leading-tight text-[9px]">จำนวนเงิน<br/>รวม</th>
-              <th rowSpan={2} className="border border-black px-1">ลายมือชื่อ</th>
+              <th rowSpan={2} className="border border-black px-0 leading-tight text-[9px] print:text-[8px]">จำนวนเงิน<br/>รวม</th>
+              <th rowSpan={2} className="border border-black px-0.5 print:px-0">ลายมือชื่อ</th>
             </tr>
-            <tr className="bg-gray-100 print:bg-white h-5">
-              <th className="border border-black text-[8px] px-0 font-normal">ชั่วโมงละบาท</th>
+            <tr className="bg-gray-100 print:bg-white h-5 print:h-4">
+              <th className="border border-black text-[8px] print:text-[7.5px] px-0 font-normal">ชั่วโมงละบาท</th>
               {daysArray.map(day => (
                 <th key={day} className={`border border-black px-0 font-normal ${isHoliday(day) ? 'bg-blue-100 print:bg-gray-300' : ''}`}>
                   {day}
@@ -156,49 +156,49 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
               return (
                 <React.Fragment key={person.name}>
                   {/* Row for Rate 60 */}
-                  <tr className="h-5">
+                  <tr className="h-5 print:h-[18px]">
                     <td rowSpan={2} className="border border-black">{index + 1}</td>
                     <td rowSpan={2} className="border border-black text-left px-1 whitespace-nowrap overflow-hidden text-ellipsis">{person.name}</td>
                     {/* Position cell */}
-                    <td rowSpan={2} className="border border-black text-center px-1 text-[10px] leading-tight whitespace-pre-line">{person.position}</td>
-                    <td className="border border-black text-[9px]">60</td>
+                    <td rowSpan={2} className="border border-black text-center px-0.5 text-[9.5px] print:text-[8.5px] leading-tight whitespace-pre-line">{person.position}</td>
+                    <td className="border border-black text-[9px] print:text-[8px] px-0">60</td>
                     {daysArray.map(day => (
                       <td key={day} className={`border border-black p-0 ${isHoliday(day) ? 'bg-blue-50 print:bg-gray-200' : ''}`}>
                         {getHoursForDay(person.records, day, 60)}
                       </td>
                     ))}
                     <td className="border border-black">{hours60 > 0 ? hours60 : ''}</td>
-                    <td className="border border-black text-right px-1">{pay60 > 0 ? pay60.toLocaleString() : ''}</td>
-                    <td rowSpan={2} className="border border-black text-right px-1 font-semibold">
+                    <td className="border border-black text-right px-1 print:px-0.5">{pay60 > 0 ? pay60.toLocaleString() : ''}</td>
+                    <td rowSpan={2} className="border border-black text-right px-1 print:px-0.5 font-semibold">
                       {totalPay > 0 ? totalPay.toLocaleString() : ''}
                     </td>
                     <td rowSpan={2} className="border border-black"></td>
                   </tr>
                   
                   {/* Row for Rate 50 */}
-                  <tr className="h-5">
-                    <td className="border border-black text-[9px]">50</td>
+                  <tr className="h-5 print:h-[18px]">
+                    <td className="border border-black text-[9px] print:text-[8px] px-0">50</td>
                     {daysArray.map(day => (
                       <td key={day} className={`border border-black p-0 ${isHoliday(day) ? 'bg-blue-50 print:bg-gray-200' : ''}`}>
                         {getHoursForDay(person.records, day, 50)}
                       </td>
                     ))}
                     <td className="border border-black">{hours50 > 0 ? hours50 : ''}</td>
-                    <td className="border border-black text-right px-1">{pay50 > 0 ? pay50.toLocaleString() : ''}</td>
+                    <td className="border border-black text-right px-1 print:px-0.5">{pay50 > 0 ? pay50.toLocaleString() : ''}</td>
                   </tr>
                 </React.Fragment>
               );
             })}
 
             {/* Total Footer Row */}
-            <tr className="font-bold bg-gray-50 print:bg-white h-7 text-[10px]">
-              <td colSpan={daysInMonth + 3} className="border border-black text-center px-4">
+            <tr className="font-bold bg-gray-50 print:bg-white h-7 print:h-[22px] text-[10px] print:text-[9px]">
+              <td colSpan={daysInMonth + 3} className="border border-black text-center px-2 print:px-1">
                 รวมรายการจ่ายทั้งสิ้น {totalAmount.toLocaleString()} บาท ({bahttext(totalAmount)})
               </td>
               <td className="border border-black text-center">รวม</td>
               <td className="border border-black text-center">{totalHours}</td>
-              <td className="border border-black text-right px-1">{totalAmount.toLocaleString()}</td>
-              <td className="border border-black text-right px-1">{totalAmount.toLocaleString()}</td>
+              <td className="border border-black text-right px-1 print:px-0.5">{totalAmount.toLocaleString()}</td>
+              <td className="border border-black text-right px-1 print:px-0.5">{totalAmount.toLocaleString()}</td>
               <td className="border border-black text-center"></td>
             </tr>
           </tbody>
@@ -206,54 +206,53 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
       </div>
 
       {/* Certification Footer - Exactly aligned with sample */}
-      <div className="mt-8 print:mt-6 page-break-inside-avoid w-full">
-        <p className="mb-6 font-medium text-xs print:text-sm">ขอรับรองว่าผู้มีรายชื่อข้างต้นได้ขึ้นปฏิบัติงาน นอกเวลาราชการจริง</p>
+      <div className="mt-4 print:mt-2 print:break-inside-avoid print:page-break-inside-avoid w-full">
+        <p className="mb-2.5 print:mb-1 font-medium text-xs print:text-[10px] leading-tight">ขอรับรองว่าผู้มีรายชื่อข้างต้นได้ขึ้นปฏิบัติงาน นอกเวลาราชการจริง</p>
 
-        {/* Increased gap from gap-4 to gap-8 for equal spacing distribution */}
-        <div className="grid grid-cols-4 gap-8 text-center text-xs print:text-xs leading-relaxed">
+        {/* 4 columns with balanced spacing */}
+        <div className="grid grid-cols-4 gap-6 print:gap-2 text-center text-xs print:text-[9px] leading-tight">
           {/* Column 1 */}
           <div className="flex flex-col items-center">
             {/* Invisible spacer to match the 2-line header of other columns */}
-            <div className="invisible h-5 mb-4">Spacer</div> 
+            <div className="invisible h-4 print:h-3.5 mb-2 print:mb-1">Spacer</div> 
             
-            <div className="mb-6 w-full">ลงชื่อ............................................</div>
-            <div className="font-semibold">นางสาวกาญจนา โลหพันธุ์</div>
-            <div>นักวิชาการสาธารณสุขชำนาญการ</div>
-            <div>หัวหน้ากลุ่มงานพัฒนทรัพยากรบุคคล</div>
+            <div className="mb-3 print:mb-1.5 w-full text-[10px] print:text-[9px]">ลงชื่อ............................................</div>
+            <div className="font-semibold print:text-[9px]">นางสาวกาญจนา โลหพันธุ์</div>
+            <div className="print:text-[8.5px] text-gray-800">นักวิชาการสาธารณสุขชำนาญการ</div>
+            <div className="print:text-[8px] text-gray-800">หัวหน้ากลุ่มงานพัฒนทรัพยากรบุคคล</div>
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col items-center">
-            <div className="h-5 mb-4 font-normal">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
+            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal print:text-[9px]">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
             
-            <div className="mb-6 w-full relative">
+            <div className="mb-3 print:mb-1.5 w-full relative text-[10px] print:text-[9px]">
               <span>ลงชื่อ................................... ผู้ตรวจสอบ</span>
             </div>
             
-            <div className="font-semibold">นายนันท์ชัย กองแก้ว</div>
-            <div>นายแพทย์ชำนาญการพิเศษ</div>
-            {/* Adjusted scale slightly for narrower column */}
-            <div className="whitespace-nowrap scale-[0.80] origin-top">หัวหน้ากลุ่มภารกิจด้านพัฒนาระบบบริการและสนับสนุนบริการสุขภาพ</div>
+            <div className="font-semibold print:text-[9px]">นายนันท์ชัย กองแก้ว</div>
+            <div className="print:text-[8.5px] text-gray-800">นายแพทย์ชำนาญการพิเศษ</div>
+            <div className="whitespace-nowrap scale-[0.82] origin-top print:text-[7.5px] text-gray-800">หัวหน้ากลุ่มภารกิจด้านพัฒนาระบบบริการและสนับสนุนบริการสุขภาพ</div>
           </div>
 
           {/* Column 3 */}
           <div className="flex flex-col items-center">
-            <div className="h-5 mb-4 font-normal">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
+            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal print:text-[9px]">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
             
-            <div className="mb-6 w-full">ลงชื่อ............................................</div>
+            <div className="mb-3 print:mb-1.5 w-full text-[10px] print:text-[9px]">ลงชื่อ............................................</div>
             
-            <div className="font-semibold">นางสาวทิวารินทร์ ทองจรูณ</div>
-            <div>นักวิชาการเงินและบัญชี</div>
+            <div className="font-semibold print:text-[9px]">นางสาวทิวารินทร์ ทองจรูณ</div>
+            <div className="print:text-[8.5px] text-gray-800">นักวิชาการเงินและบัญชี</div>
           </div>
 
            {/* Column 4 */}
            <div className="flex flex-col items-center">
-            <div className="h-5 mb-4 font-normal">คำสั่งผู้อำนวยการ อนุมัติ</div>
+            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal print:text-[9px]">คำสั่งผู้อำนวยการ อนุมัติ</div>
             
-            <div className="mb-6 w-full">ลงชื่อ............................................</div>
+            <div className="mb-3 print:mb-1.5 w-full text-[10px] print:text-[9px]">ลงชื่อ............................................</div>
             
-            <div className="font-semibold">นายแพทย์มงคล ลือชูวงศ์</div>
-            <div>ผู้อำนวยการโรงพยาบาลสมเด็จพระเจ้าตากสินมหาราช</div>
+            <div className="font-semibold print:text-[9px]">นายแพทย์มงคล ลือชูวงศ์</div>
+            <div className="print:text-[8.5px] text-gray-800">ผู้อำนวยการโรงพยาบาลสมเด็จพระเจ้าตากสินมหาราช</div>
           </div>
         </div>
       </div>

@@ -206,53 +206,70 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
       </div>
 
       {/* Certification Footer - Exactly aligned with sample */}
-      <div className="mt-4 print:mt-2 print:break-inside-avoid print:page-break-inside-avoid w-full">
-        <p className="mb-2.5 print:mb-1 font-medium text-xs print:text-[10px] leading-tight">ขอรับรองว่าผู้มีรายชื่อข้างต้นได้ขึ้นปฏิบัติงาน นอกเวลาราชการจริง</p>
+      <div className="mt-3 print:mt-1.5 print:break-inside-avoid print:page-break-inside-avoid w-full text-gray-900">
+        <p className="mb-1 print:mb-0.5 font-medium text-xs print:text-[9.5px] leading-tight">
+          ขอรับรองว่าผู้มีรายชื่อข้างต้นได้ขึ้นปฏิบัติงาน นอกเวลาราชการจริง
+        </p>
+        <p className="mb-3 print:mb-2 font-medium text-xs print:text-[9.5px] leading-tight">
+          ตรวจสอบถูกต้องแล้วเห็นควรจ่ายปฏิบัติงานนอกเวลาราชการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalAmount.toLocaleString()}&nbsp;&nbsp;บาท ให้กับ จพ.โสตทัศนศึกษา 1 คน นวก.โสตทัศนศึกษา 3 คน พนง.บริการ 2 คน
+        </p>
 
-        {/* 4 columns with balanced spacing */}
-        <div className="grid grid-cols-4 gap-6 print:gap-2 text-center text-xs print:text-[9px] leading-tight">
+        {/* 5 columns with balanced spacing as shown in sample image */}
+        <div className="grid grid-cols-5 gap-2 print:gap-1 text-center text-xs print:text-[8.5px] leading-tight">
           {/* Column 1 */}
           <div className="flex flex-col items-center">
-            {/* Invisible spacer to match the 2-line header of other columns */}
-            <div className="invisible h-4 print:h-3.5 mb-2 print:mb-1">Spacer</div> 
+            {/* Invisible spacer to match the header of other columns */}
+            <div className="invisible h-4 print:h-3.5 mb-2 print:mb-1 text-[9px]">Spacer</div> 
             
-            <div className="mb-3 print:mb-1.5 w-full text-[10px] print:text-[9px]">ลงชื่อ............................................</div>
-            <div className="font-semibold print:text-[9px]">นางสาวกาญจนา โลหพันธุ์</div>
-            <div className="print:text-[8.5px] text-gray-800">นักวิชาการสาธารณสุขชำนาญการ</div>
-            <div className="print:text-[8px] text-gray-800">หัวหน้ากลุ่มงานพัฒนทรัพยากรบุคคล</div>
+            <div className="mb-2.5 print:mb-1.5 w-full text-[10px] print:text-[8.5px]">ลงชื่อ............................................</div>
+            <div className="font-semibold text-xs print:text-[8.5px]">( นางสาวปพิชญา เอี้ยงหมี )</div>
+            <div className="text-[11px] print:text-[8px] text-gray-800 mt-0.5">หัวหน้างานโสตทัศนศึกษา</div>
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col items-center">
-            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal print:text-[9px]">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
+            <div className="invisible h-4 print:h-3.5 mb-2 print:mb-1 text-[9px]">Spacer</div> 
             
-            <div className="mb-3 print:mb-1.5 w-full relative text-[10px] print:text-[9px]">
-              <span>ลงชื่อ................................... ผู้ตรวจสอบ</span>
-            </div>
-            
-            <div className="font-semibold print:text-[9px]">นายนันท์ชัย กองแก้ว</div>
-            <div className="print:text-[8.5px] text-gray-800">นายแพทย์ชำนาญการพิเศษ</div>
-            <div className="whitespace-nowrap scale-[0.82] origin-top print:text-[7.5px] text-gray-800">หัวหน้ากลุ่มภารกิจด้านพัฒนาระบบบริการและสนับสนุนบริการสุขภาพ</div>
+            <div className="mb-2.5 print:mb-1.5 w-full text-[10px] print:text-[8.5px]">ลงชื่อ............................................</div>
+            <div className="font-semibold text-xs print:text-[8.5px]">( นางสาวกาญจนา โลหพันธุ์ )</div>
+            <div className="text-[11px] print:text-[8px] text-gray-800 mt-0.5">หัวหน้ากลุ่มงานพัฒนาทรัพยากรบุคคล</div>
           </div>
 
           {/* Column 3 */}
           <div className="flex flex-col items-center">
-            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal print:text-[9px]">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
+            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal text-[10px] print:text-[8.5px]">ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
             
-            <div className="mb-3 print:mb-1.5 w-full text-[10px] print:text-[9px]">ลงชื่อ............................................</div>
+            <div className="mb-2.5 print:mb-1.5 w-full relative text-[10px] print:text-[8.5px] whitespace-nowrap">
+              <span>ลงชื่อ..................................หัวหน้าฝ่าย</span>
+            </div>
             
-            <div className="font-semibold print:text-[9px]">นางสาวทิวารินทร์ ทองจรูณ</div>
-            <div className="print:text-[8.5px] text-gray-800">นักวิชาการเงินและบัญชี</div>
+            <div className="font-semibold text-xs print:text-[8.5px]">( นายธนันท์ชัย กองแก้ว )</div>
+            <div className="text-[11px] print:text-[8px] text-gray-800 mt-0.5 leading-tight">
+              <div>หัวหน้ากลุ่มภารกิจด้านพัฒนาระบบบริการ</div>
+              <div>และสนับสนุนบริการสุขภาพ</div>
+            </div>
           </div>
 
-           {/* Column 4 */}
-           <div className="flex flex-col items-center">
-            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal print:text-[9px]">คำสั่งผู้อำนวยการ อนุมัติ</div>
+          {/* Column 4 */}
+          <div className="flex flex-col items-center">
+            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal text-[10px] print:text-[8.5px]">ได้ตรวจสอบแล้วถูกต้องเห็นควรอนุมัติ</div>
             
-            <div className="mb-3 print:mb-1.5 w-full text-[10px] print:text-[9px]">ลงชื่อ............................................</div>
+            <div className="mb-2.5 print:mb-1.5 w-full text-[10px] print:text-[8.5px]">ลงชื่อ............................................</div>
             
-            <div className="font-semibold print:text-[9px]">นายแพทย์มงคล ลือชูวงศ์</div>
-            <div className="print:text-[8.5px] text-gray-800">ผู้อำนวยการโรงพยาบาลสมเด็จพระเจ้าตากสินมหาราช</div>
+            <div className="font-semibold text-xs print:text-[8.5px]">( นางสาวทิวารินทร์ ทองจรูณ )</div>
+            <div className="text-[11px] print:text-[8px] text-gray-800 mt-0.5">นักวิชาการเงินและบัญชี</div>
+          </div>
+
+          {/* Column 5 */}
+          <div className="flex flex-col items-center">
+            <div className="h-4 print:h-3.5 mb-2 print:mb-1 font-normal text-[10px] print:text-[8.5px]">คำสั่งผู้อำนวยการอนุมัติ</div>
+            
+            <div className="mb-2.5 print:mb-1.5 w-full text-[10px] print:text-[8.5px]">ลงชื่อ............................................</div>
+            
+            <div className="font-semibold text-xs print:text-[8.5px]">( นายแพทย์มงคล ลือชูวงศ์ )</div>
+            <div className="text-[11px] print:text-[8px] text-gray-800 mt-0.5 whitespace-nowrap scale-[0.88] origin-top">
+              ผู้อำนวยการโรงพยาบาลสมเด็จพระเจ้าตากสินมหาราช
+            </div>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ const POSITION_MAP: Record<string, string> = {
   "นายวิทวัส แปงใจ": "พนักงานบริการ"
 };
 
-const DEFAULT_POSITION = "พนักงาน";
+const DEFAULT_POSITION = "พนักงานบริการ";
 
 // ลำดับรายชื่อที่ต้องการ
 const SORT_ORDER = [
@@ -37,7 +37,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
   const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
   // Filter and Sort Data
-  const { filteredData, totalAmount, totalHours } = useMemo(() => {
+  const { filteredData, totalAmount, totalHours, positionCounts } = useMemo(() => {
     let result: { name: string; position: string; records: OTRecord[] }[] = [];
     let sumMoney = 0;
     let sumHours = 0;
@@ -76,7 +76,31 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
       return a.name.localeCompare(b.name, 'th');
     });
 
-    return { filteredData: result, totalAmount: sumMoney, totalHours: sumHours };
+    // Count positions dynamically from result (the staff present in the table for this month)
+    let jpCount = 0;   // จพ.โสตทัศนศึกษา
+    let nwkCount = 0;  // นวก.โสตทัศนศึกษา
+    let pnwCount = 0;  // พนง.บริการ
+
+    result.forEach(person => {
+      if (person.position.includes('เจ้าพนักงานโสตทัศนศึกษา') || person.position.includes('จพ.โสตทัศนศึกษา')) {
+        jpCount++;
+      } else if (person.position.includes('นักวิชาการโสตทัศนศึกษา') || person.position.includes('นวก.โสตทัศนศึกษา')) {
+        nwkCount++;
+      } else if (person.position.includes('พนักงานบริการ') || person.position.includes('พนง.บริการ')) {
+        pnwCount++;
+      }
+    });
+
+    return { 
+      filteredData: result, 
+      totalAmount: sumMoney, 
+      totalHours: sumHours,
+      positionCounts: {
+        jp: jpCount,
+        nwk: nwkCount,
+        pnw: pnwCount
+      }
+    };
   }, [data]);
 
   const isHoliday = (day: number) => {
@@ -207,7 +231,7 @@ export const DisbursementSheet: React.FC<Props> = ({ data, month, year, customHo
           ขอรับรองว่าผู้มีรายชื่อข้างต้นได้ขึ้นปฏิบัติงาน นอกเวลาราชการจริง
         </p>
         <p className="mb-3 print:mb-2 font-medium text-xs print:text-[9.5px] leading-tight">
-          ตรวจสอบถูกต้องแล้วเห็นควรจ่ายปฏิบัติงานนอกเวลาราชการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalAmount.toLocaleString()}&nbsp;&nbsp;บาท ให้กับ จพ.โสตทัศนศึกษา 1 คน นวก.โสตทัศนศึกษา 3 คน พนง.บริการ 2 คน
+          ตรวจสอบถูกต้องแล้วเห็นควรจ่ายปฏิบัติงานนอกเวลาราชการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{totalAmount.toLocaleString()}&nbsp;&nbsp;บาท ให้กับ จพ.โสตทัศนศึกษา {positionCounts.jp} คน นวก.โสตทัศนศึกษา {positionCounts.nwk} คน พนง.บริการ {positionCounts.pnw} คน
         </p>
 
         {/* 5 columns with balanced spacing as shown in sample image */}

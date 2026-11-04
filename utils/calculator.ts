@@ -3,6 +3,13 @@ import { RawRecord, CalculationResult, OTRecord } from '../types';
 // ปรับเปลี่ยนการจ้างงาน: นายวิทวัส แปงใจ และ นายปรพัฒน์ ขัตวงษ์ เป็นเจ้าหน้าที่ปกติเหมือนคนอื่นๆ
 export const SPECIAL_STAFF: string[] = [];
 
+// รายชื่อเจ้าหน้าที่ที่เริ่มนับ OT วันปกติเวลา 17:00 น.
+export const WEEKDAY_1700_STAFF: string[] = [
+  "นายกฤชณัท เทพมงคล",
+  "นายวิทวัส แปงใจ",
+  "นายปรพัฒน์ ขัตวงษ์"
+];
+
 function formatTime(date: Date): string {
   const hours = date.getHours().toString().padStart(2, '0');
   const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -88,8 +95,8 @@ export function calculateOT(
         }
       } else {
         // Normal Day
-        let otStartTimeDecimal = 16.5;
-        if (isSpecial) otStartTimeDecimal = 17.0;
+        const is1700Staff = WEEKDAY_1700_STAFF.includes(name);
+        const otStartTimeDecimal = is1700Staff ? 17.0 : 16.5;
 
         const checkOutTimeDecimal = endTime.getHours() + (endTime.getMinutes() / 60);
         otHours = Math.floor(checkOutTimeDecimal - otStartTimeDecimal);
@@ -99,7 +106,7 @@ export function calculateOT(
 
         if (otHours > 0) {
           const otStartDate = new Date(endTime);
-          otStartDate.setHours(Math.trunc(otStartTimeDecimal), (otStartTimeDecimal % 1) * 60, 0, 0);
+          otStartDate.setHours(Math.trunc(otStartTimeDecimal), Math.round((otStartTimeDecimal % 1) * 60), 0, 0);
 
           results[name].push({
             date: recordDate,

@@ -215,6 +215,13 @@ const App: React.FC = () => {
               </div>
             )}
           </div>
+
+          <div className="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500 flex items-start gap-2">
+            <Info className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+            <div>
+              <span className="font-medium text-gray-700">เกณฑ์เวลาเริ่ม OT วันปกติ:</span> นายกฤชณัท เทพมงคล, นายวิทวัส แปงใจ, นายปรพัฒน์ ขัตวงษ์ เริ่มนับเวลา <span className="font-semibold text-blue-700">17:00 น.</span> (เจ้าหน้าที่ท่านอื่นเริ่ม 16:30 น.) | วันหยุดนับตามเวลาปฏิบัติงานจริง
+            </div>
+          </div>
         </div>
 
         {/* Tabs - Hidden on Print */}
